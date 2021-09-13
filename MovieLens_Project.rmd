@@ -931,7 +931,7 @@ movielenseM <- as(y, "realRatingMatrix")
 # to train and test sets
 e <- evaluationScheme(movielenseM, method="split", 
                       train=0.8, k=1, given=-10, goodRating = 3.5)
-e
+
 
 
 # create a libmf recommender using training data
@@ -941,7 +941,7 @@ r <- Recommender(getData(e, "train"), "LIBMF")
 # create predictions for the test data using known ratings (the given param 
 # from the evaluation scheme)
 p <- predict(r, getData(e, "known"), type="ratings")
-p
+
 
 # calculate the average RMSE when User specific
 
@@ -959,6 +959,7 @@ RMSE_results %>%
 
 # use gc() one last time to free unused memory
 gc()
+############################# END WARNING  #####################################
 ```
 
 This is a great result! However, the time and machine requirements are not 
@@ -1047,12 +1048,12 @@ opts <- r$tune(train_data, opts = list(dim = c(10, 20, 30),
                                        costp_l1 = 0,                    
                                        costq_l1 = 0,                    
                                        lrate    = c(0.01, 0.1),         
-                                       nthread  = 8, # WARNING (Select according to your cpu!)              
+                                       nthread  = 8, 
                                        niter    = 10,                   
                                        verbose  = FALSE)) 
 # Train the algorithm
 r$train(train_data, opts = c(opts$min, 
-                             nthread = 8, # WARNING (Select according to your CPU!)
+                             nthread = 8, 
                              niter = 100, 
                              verbose = FALSE))
 
@@ -1157,7 +1158,6 @@ gc()
 # 90/10.
 e <- evaluationScheme(movielenseM, method="split", 
                       train=0.9, k=1, given=-10, goodRating = 3.5)
-e
 
 
 # create a libmf recommender using training data
@@ -1167,7 +1167,7 @@ r <- Recommender(getData(e, "train"), "LIBMF")
 # create predictions for the test data using known ratings (the given param 
 # from the evaluation scheme)
 p <- predict(r, getData(e, "known"), type="ratings")
-p
+
 
 # calculate the average RMSE when User specific
 
@@ -1187,6 +1187,8 @@ Final_Validation_RMSE_results_table %>% knitr::kable()
 
 # use gc() one last time to free unused memory
 gc()
+
+######################### END WARNING  ########################################
 ```
 
 
