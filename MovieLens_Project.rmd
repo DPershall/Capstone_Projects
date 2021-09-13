@@ -938,10 +938,6 @@ rownames(y)<- y[,1]
 
 y <- y[,-1]
 
-# Vectorization for matrix y
-y <- sweep(y, 2, colMeans(y, na.rm=TRUE))
-y <- sweep(y, 1, rowMeans(y, na.rm=TRUE))
-
 # Finally coerce to the recommenderlab specific "realRatingMatrix"
 movielenseM <- as(y, "realRatingMatrix")
 
