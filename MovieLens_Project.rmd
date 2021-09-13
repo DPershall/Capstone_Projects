@@ -216,8 +216,8 @@ glimpse(movielens)
 
 ```
 
-Now that is accomplished, I can plot the average rating based on release year
-with some lm smoothing
+Now I can plot the average rating based on release year
+with some lm smoothing.
 
 ```{r}
 movielens %>% group_by(Release_Year) %>%
@@ -225,7 +225,7 @@ movielens %>% group_by(Release_Year) %>%
   ggplot(aes(Release_Year,mean_Release_Year_Rating)) + geom_point() + geom_smooth(method = "lm")
 ```
 
-So we can observe that there seems to be a relationship between the release year
+So, we can observe that there seems to be a relationship between the release year
 and the average rating given to the movies.
 
 Now to think of this time effect in another way, I will categorize by the 
@@ -237,6 +237,7 @@ movielens %>% group_by(years_since_release) %>%
   summarise(mean_rating_by_years_since_release = mean(rating)) %>%
   ggplot(aes(years_since_release, mean_rating_by_years_since_release)) + geom_point() + geom_smooth(method = "lm")
 ```
+
 Interesting, the time since a movie was released seems to have a net positive
 effect on the average rating. I will keep this in mind for the predictive 
 algorithms later in the project.
@@ -897,8 +898,8 @@ memory based for computations.
 # THE FOLLOWING CODE TAKES 30 MINUTES TO RUN AND REQUIRES A MINIMUM of 32GB of 
 # RAM
 
-# I USED CLOUD COMPUTING ON AWS TO RUN THIS CODE AS MY MACHINE CANNOT HANDLE 
-# THE MEMORY LOAD
+# I USED CLOUD COMPUTING ON AWS TO KNIT THE PDF REPORT BECAUSE MY MACHINE 
+# CANNOT HANDLE THE MEMORY LOAD
 
 ########################         WARNING           #############################
 # IF YOUR SYSTEM DOESN'T HAVE AT LEAST 32GB OF RAM DO NOT RUN THIS CHUNK LOCALLY
@@ -1085,7 +1086,7 @@ matrix factorization model.
 lambdas <- seq(0, 10, 0.25)
 
 rmses <- sapply(lambdas, function(l){
-  mu <- mean(train_set$rating)
+  mu <- mean(edx$rating)
   
   b_i <- edx %>%
     group_by(movieId) %>%
@@ -1140,8 +1141,8 @@ Final_Validation_RMSE_results_table %>% knitr::kable()
 # THE FOLLOWING CODE TAKES 30 MINUTES TO RUN AND REQUIRES A MINIMUM of 32GB of 
 # RAM
 
-# I USED CLOUD COMPUTING ON AWS TO RUN THIS CODE AS MY MACHINE CANNOT HANDLE 
-# THE MEMORY LOAD
+# I USED CLOUD COMPUTING ON AWS TO KNIT THE PDF REPORT BECAUSE MY MACHINE 
+# CANNOT HANDLE THE MEMORY LOAD
 
 ########################         WARNING           #############################
 # IF YOUR SYSTEM DOESN'T HAVE AT LEAST 32GB OF RAM DO NOT RUN THIS CHUNK LOCALLY
