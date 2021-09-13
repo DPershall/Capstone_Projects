@@ -1216,12 +1216,12 @@ opts <- r$tune(train_data, opts = list(dim = c(10, 20, 30),
                                        costp_l1 = 0,                    
                                        costq_l1 = 0,                    
                                        lrate    = c(0.01, 0.1),         
-                                       nthread  = 8, # WARNING (Select according to your CPU!)             
+                                       nthread  = 8, 
                                        niter    = 10,                   
                                        verbose  = FALSE)) 
 # Train the algorithm
 r$train(train_data, opts = c(opts$min, 
-                             nthread = 8, # WARNING (Select according to your CPU!)
+                             nthread = 8, 
                              niter = 100, 
                              verbose = FALSE))
 
