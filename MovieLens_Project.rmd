@@ -50,10 +50,14 @@ I will reach for my final validation to achieve a RMSE below 0.80.
 
 # **Libraries**
 Install the required packages and load the libraries
-```{r}
+```{r echo=FALSE}
 # Cut down the noise
 knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 
+options(warning=FALSE, message=FALSE)
+```
+
+```{r}
 # Libraries
 if(!require(tidyverse)) 
   install.packages("tidyverse", repos = "http://cran.us.r-project.org")
