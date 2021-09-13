@@ -1257,11 +1257,10 @@ recommendation system is perfect, I am pleased to have two final validations
 that surpass the class goal of an RMSE below .86490, and happy to have met my 
 personal goal of an RMSE below that of 0.80. 
 
-Obviously, the results from Recosystem's implementation were the best both in
-terms of error and capacity for the data set. In the future, I plan on learning 
-more about parallelization and the benefits it brings to working with "big"
-data. While this data set is large enough to present challenges, it is important 
-to remember that it is still only a subset of the movielense data. It is also 
-worth noting that as time progresses the size of data sets like this can 
-increase dramatically as new users are brought on board and new films hit
-the marketplace. 
+Obviously, the results from Recosystem's implementation were the best in
+terms of RMSE results and capacity for the data set. In the future, I plan on 
+learning more about parallelization and the benefits it brings to working with 
+"big" data. While this data set is large enough to present challenges, it is 
+important to remember that it is still only a subset of the movielense data. It 
+is also worth noting that as time progresses, the size of data sets like this 
+can increase dramatically from the addition of new users and movies.
