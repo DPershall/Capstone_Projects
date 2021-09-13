@@ -113,7 +113,7 @@ library(recosystem)
 ```
 
 # **Pulling and cleaning the data**
-```{r message=FALSE, warning=FALSE}
+```{r}
 
 # MovieLens 10M dataset:
 # https://grouplens.org/datasets/movielens/10m/
@@ -347,7 +347,7 @@ naive_rmse
 When all unknown ratings are predicted with this average, the result is a 
 residual mean squared error of $\approx$ 1.06. The code below creates a table to
 keep track of the RMSE on all models that I will examine in this project.
-```{r message=FALSE}
+```{r}
 RMSE_results <- tibble(Method = "The Average", RMSE = naive_rmse) 
 RMSE_results %>% knitr::kable()
 ```
@@ -718,7 +718,7 @@ where $y_{u, i}$ is the entry in row $u$ for user and column $i$ for movie.
 For illustration purposes we will only consider a small subset of movies with 
 many ratings and users that have rated many movies. 
 
-```{r warning=FALSE}
+```{r}
 # Sample the train set for movies that have received 600 or more 
 # ratings and users who users who have rated 600 or more movies
 
@@ -839,7 +839,7 @@ about the data, I can make a plot of them. For example, the first two principal
 components are plotted below. The points represent individual movies and I have
 provided the titles for few in order to provide us with a quick overview.
 
-```{r warning=FALSE, message=FALSE}
+```{r}
 pcs <- data.frame(pca$rotation, name = colnames(y))
 pcs %>%  
   ggplot(aes(PC1, PC2)) + 
