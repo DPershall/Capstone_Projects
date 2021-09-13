@@ -6,6 +6,30 @@ output:
   pdf_document: default
 urlcolor: blue
 ---
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+################################################################################
+#                                                                              #
+#                                   WARNING                                    #
+#                                                                              #
+################################################################################
+# Do not simply run all the chunks in this rmd without reading first.          #
+#                                                                              #
+# There are models shown that could crash R on your system if it doesn't       #
+# meet certain requirements of RAM capacity. They are clearly marked so you    #
+# can't miss them.                                                             #
+#                                                                              #  
+# I used AWS so that I could compute in the cloud.                             #
+#                                                                              #
+# You can run the other models locally without worry. They provide             #
+# better results anyway, so you won't be missing out!                          #
+#                                                                              #
+################################################################################
+
+# Cut down the noise
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+
+options(warning=FALSE, message=FALSE)
+```
 
 # **Introduction**
 
@@ -47,13 +71,6 @@ in his book and lectures. It is worth noting that in order to receive an
 A on our project, our final validation/s must score an RMSE of below .86490. 
 
 I will reach for my final validation to achieve a RMSE below 0.80.
-
-```{r echo=FALSE}
-# Cut down the noise
-knitr::opts_chunk$set(warning=FALSE, message=FALSE)
-
-options(warning=FALSE, message=FALSE)
-```
 
 # **Libraries**
 Install the required packages and load the libraries
