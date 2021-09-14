@@ -899,12 +899,14 @@ The process of solving the matrices $P$ and $Q$ is called model training, and
 the selection of penalty parameters is parameter tuning. After obtaining $P$ and
 $Q$, you can then do the prediction of $\hat{R}_{u,i}=p_uq_i$.
 
-Our instructor mentioned in the video that we should look into recommenderlab 
-for matrix factorization. I have written the code below for the recommenderlab 
-version of the LIBMF library (library for matrix factorization). However, it 
-takes quite some time to run because recommenderlab is by default extremely 
-memory based for computations.
-
+I will walk through the Recommenderlab method for matrix factorization first. 
+The recommenderlab packages are very popular because they can be used with 
+several other algorithms like Funk SVD or Item Based Collaborative Filtering.
+The chunk below will use the LIBMF library (Library for Matrix Factorization). 
+I do not recommend running this chunk on your personal machine because it will 
+crash R if you do not have at least 32GB of Ram. I ran this project on AWS to 
+save my hardware. The recommenderlab model is kept in the project in order to 
+make broader points about large data sets and the challenges they present.
 
 ```{r}
 ################################################################################
@@ -920,7 +922,6 @@ memory based for computations.
 
 ########################         WARNING           #############################
 # IF YOUR SYSTEM DOESN'T HAVE AT LEAST 32GB OF RAM DO NOT RUN THIS CHUNK LOCALLY
-
 
 # First step is to free unused memory space 
 gc()
@@ -946,19 +947,14 @@ movielenseM <- as(y, "realRatingMatrix")
 e <- evaluationScheme(movielenseM, method="split", 
                       train=0.8, k=1, given=-10)
 
-
-
 # create a libmf recommender using training data
 r <- Recommender(getData(e, "train"), "LIBMF")
                                                             
-
 # create predictions for the test data using known ratings (the given param 
 # from the evaluation scheme)
 p <- predict(r, getData(e, "known"), type="ratings")
 
-
 # calculate the average RMSE when User specific
-
 acc <- calcPredictionAccuracy(p, getData(e, "unknown"), byUser=TRUE)
 acc <- mean(acc[,1])
 
@@ -975,12 +971,15 @@ gc()
 ######################### END OF CHUNK UNDER WARNING  ##########################
 ```
 
-This is a great result! However, the time and machine requirements are not 
+This is a better result! However, the time and machine requirements are not 
 feasible for my peers to review on their own machines. This problem is a common
-one with large data sets eating too much ram for computation. The solution is 
-quite simple however. That is to to compute the calculations in parallel
-on most modern CPU's. Indeed, this problem is so common that it has a name and
-a wikipedia page devoted to it. It is called "Embarrassingly Parallel"
+one. Large data sets tend to eat up too much time and machine power for 
+computation. However, the solution is quite simple. That is to compute the 
+calculations in parallel. Indeed, this problem is so common that it has a 
+name and a wikipedia page devoted to it. It is called "Embarrassingly Parallel". 
+You can read about it by following the link below.
+
+[https://en.wikipedia.org/wiki/Embarrassingly_parallel](https://en.wikipedia.org/wiki/Embarrassingly_parallel)
 
 ## **Matrix Factorization Model - Recosystem**
 My search for a better implementation of the LIBMF library lead me to Recosystem.
@@ -1172,18 +1171,14 @@ gc()
 e <- evaluationScheme(movielenseM, method="split", 
                       train=0.9, k=1, given=-10)
 
-
 # create a libmf recommender using training data
 r <- Recommender(getData(e, "train"), "LIBMF")
-                                                            
 
 # create predictions for the test data using known ratings (the given param 
 # from the evaluation scheme)
 p <- predict(r, getData(e, "known"), type="ratings")
 
-
 # calculate the average RMSE when User specific
-
 acc <- calcPredictionAccuracy(p, getData(e, "unknown"), byUser=TRUE)
 acc <- mean(acc[,1])
 
@@ -1199,7 +1194,6 @@ Final_Validation_RMSE_results_table %>% knitr::kable()
 
 # use gc() one last time to free unused memory
 gc()
-
 ######################### END OF CHUNK UNDER WARNING  ##########################
 ```
 
