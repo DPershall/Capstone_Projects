@@ -972,7 +972,7 @@ RMSE_results %>%
 
 # use gc() one last time to free unused memory
 gc()
-############################# END WARNING  #####################################
+######################### END OF CHUNK UNDER WARNING  ##########################
 ```
 
 This is a great result! However, the time and machine requirements are not 
@@ -1200,7 +1200,7 @@ Final_Validation_RMSE_results_table %>% knitr::kable()
 # use gc() one last time to free unused memory
 gc()
 
-######################### END WARNING  ########################################
+######################### END OF CHUNK UNDER WARNING  ##########################
 ```
 
 
