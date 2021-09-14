@@ -895,16 +895,17 @@ Final_Validation_RMSE_results_table %>% knitr::kable()
 
 # While this is just a glimpse into the world of recommendation systems using 
 # machine learning, it has been an informative one! I have certainly enjoyed 
-# working through the different models and examining the results. While no 
-# recommendation system is perfect, I am pleased to have two final validations 
-# that surpass the class goal of an RMSE below .86490, and happy to have met my 
-# personal goal of an RMSE below that of 0.80. 
+# working through the different models and examining the results. I am pleased 
+# to have three final validations that surpass the class goal of an RMSE below 
+# 0.86490, and I am happy to have met my personal goal of an RMSE below 0.80. 
 
-# Obviously, the results from Recosystem's implementation were the best both in
-# terms of error and capacity for the data set. In the future, I plan on learning 
-# more about parallelization and the benefits it brings to working with "big"
-# data. While this data set is large enough to present challenges, it is important 
-# to remember that it is still only a subset of the movielense data. It is also 
-# worth noting that as time progresses the size of data sets like this can 
-# increase dramatically as new users are brought on board and new films hit
-# the marketplace. 
+# Obviously, the results from Recosystem's parallel implementation of the LIBMF
+# library were the best. Not only is it easy to tune, but the time saved via
+# parallelization is awesome.
+
+# While this data set is large enough to present challenges, it is important to 
+# remember that it is still only a subset of the movielense data. It is also worth 
+# noting that as time progresses, the size of data sets like this can increase 
+# dramatically from the addition of new users and movies. Therefore, it stands to 
+# reason that advances in the field of recommendation systems will more than 
+# likely require parallelization and some form of cloud computing.
