@@ -743,50 +743,45 @@ RMSE_results %>%
 
 ######### FINAL VALIDATIONS
 
-## Regularizaed Movie + User + Time + Genre Effect model
-lambdas <- seq(0, 10, 0.25)
+# I use the lambda that reduced the RMSE the most in the train / test model to
+# avoid over training of the final validation model. It is stored as lambda.
 
-rmses <- sapply(lambdas, function(l){
-  mu <- mean(edx$rating)
-  
-  b_i <- edx %>%
-    group_by(movieId) %>%
-    summarize(b_i = sum(rating - mu)/(n()+l))
-  
-  b_u <- edx %>%
-    left_join(b_i, by="movieId") %>%
-    group_by(userId) %>%
-    summarize(b_u = sum(rating - b_i - mu)/(n()+l))
-  
-  b_t <- edx %>%
-    left_join(b_i, by='movieId') %>%
-    left_join(b_u, by='userId') %>%
-    group_by(years_since_release) %>%
-    summarize(b_t = sum(rating - b_i - b_u - mu)/(n()+l))
-  
-  b_g <- edx %>% 
-    left_join(b_i, by='movieId') %>%
-    left_join(b_u, by='userId') %>%
-    left_join(b_t, by='years_since_release') %>% 
-    group_by(genres) %>% 
-    summarize(b_g = sum(rating - b_i - b_u - b_t - mu)/(n()+l))
-  
-  predicted_ratings <- validation %>%
-    left_join(b_i, by = "movieId") %>%
-    left_join(b_u, by = "userId") %>%
-    left_join(b_t, by = 'years_since_release') %>% 
-    left_join(b_g, by = 'genres') %>% 
-    mutate(pred = mu + b_i + b_u + b_t + b_g) %>%
-    .$pred
-  
-  return(RMSE(predicted_ratings, validation$rating))
-})
+mu <- mean(edx$rating)
 
-lambda <- lambdas[which.min(rmses)]
-lambda
+b_i <- edx %>%
+  group_by(movieId) %>%
+  summarize(b_i = sum(rating - mu)/(n()+lambda))
+
+b_u <- edx %>%
+  left_join(b_i, by="movieId") %>%
+  group_by(userId) %>%
+  summarize(b_u = sum(rating - b_i - mu)/(n()+lambda))
+
+b_t <- edx %>%
+  left_join(b_i, by='movieId') %>%
+  left_join(b_u, by='userId') %>%
+  group_by(years_since_release) %>%
+  summarize(b_t = sum(rating - b_i - b_u - mu)/(n()+lambda))
+
+b_g <- edx %>% 
+  left_join(b_i, by='movieId') %>%
+  left_join(b_u, by='userId') %>%
+  left_join(b_t, by='years_since_release') %>% 
+  group_by(genres) %>% 
+  summarize(b_g = sum(rating - b_i - b_u - b_t - mu)/(n()+lambda))
+
+predicted_ratings <- validation %>%
+  left_join(b_i, by = "movieId") %>%
+  left_join(b_u, by = "userId") %>%
+  left_join(b_t, by = 'years_since_release') %>% 
+  left_join(b_g, by = 'genres') %>% 
+  mutate(pred = mu + b_i + b_u + b_t + b_g) %>%
+  .$pred
+
+RMSE_Reg <- RMSE(predicted_ratings, validation$rating)
 
 Final_Validation_RMSE_results_table <- tibble(Method = 
-                                                "Regularized Movie + User + Time + Genre Model", RMSE = min(rmses)) 
+                                                "Regularized Movie + User + Time + Genre Model", RMSE = RMSE_Reg) 
 
 Final_Validation_RMSE_results_table %>% knitr::kable()
 
