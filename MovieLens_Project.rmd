@@ -960,7 +960,6 @@ p <- predict(r, getData(e, "known"), type="ratings")
 # calculate the average RMSE when User specific
 
 acc <- calcPredictionAccuracy(p, getData(e, "unknown"), byUser=TRUE)
-
 acc <- mean(acc[,1])
 
 # Append to the RMSE results tibble
@@ -1186,7 +1185,6 @@ p <- predict(r, getData(e, "known"), type="ratings")
 # calculate the average RMSE when User specific
 
 acc <- calcPredictionAccuracy(p, getData(e, "unknown"), byUser=TRUE)
-
 acc <- mean(acc[,1])
 
 # Append to the RMSE results tibble
