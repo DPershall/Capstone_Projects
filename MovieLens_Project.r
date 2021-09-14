@@ -613,7 +613,7 @@ pcs %>% select(name, PC2) %>% arrange(desc(PC2)) %>% slice(1:10) %>% tibble() %>
 
 ########################         WARNING           #############################
 # IF YOUR SYSTEM DOESN'T HAVE AT LEAST 32GB OF RAM DO NOT RUN THIS CHUNK LOCALLY
-
+# SKIP DOWN TO THE END OF WARNING CHUNK
 
 # First step is to free unused memory space 
 gc()
@@ -805,7 +805,7 @@ Final_Validation_RMSE_results_table %>% knitr::kable()
 
 ########################         WARNING           #############################
 # IF YOUR SYSTEM DOESN'T HAVE AT LEAST 32GB OF RAM DO NOT RUN THIS CHUNK LOCALLY
-
+# SKIP DOWN TO END OF WARNING CHUNK
 
 # Free unused memory space 
 gc()
